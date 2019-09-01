@@ -53,7 +53,7 @@ const init = () => {
          success: (result, status) => {
              const container = $('.feed');
              const title = $('.header-title');
-             const entries = result.feed.entries;
+             const { entries } = result.feed;
              const entriesLen = entries.length;
              const entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
@@ -71,15 +71,14 @@ const init = () => {
                  cb();
              }
          },
-
          error: (result, status, err) => {
-             //run only the callback without attempting to parse result due to error
+             // run only the callback without attempting to parse result due to error
              if (cb) {
                  cb();
              }
          },
      });
- }
+ };
 
 /* Google API: Loads the Feed Reader API and defines what function
  * to call when the Feed Reader API is done loading.
@@ -123,7 +122,5 @@ $((() => {
     /* When the menu icon is clicked on, we need to toggle a class
      * on the body to perform the hiding/showing of our menu.
      */
-    menuIcon.on('click', function() {
-        $('body').toggleClass('menu-hidden');
-    });
+    menuIcon.on('click', () => $('body').toggleClass('menu-hidden'));
 })());
