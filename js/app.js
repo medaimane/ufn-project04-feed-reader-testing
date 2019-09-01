@@ -7,7 +7,7 @@
  */
 
 // The names and URLs to all of the feeds we'd like available.
-var allFeeds = [
+const allFeeds = [
     {
         name: 'Udacity Blog',
         url: 'http://blog.udacity.com/feed'
@@ -24,13 +24,13 @@ var allFeeds = [
 ];
 
 /* This function starts up our application. The Google Feed
- * Reader API is loaded asynchonously and will then call this
+ * Reader API is loaded asynchronously and will then call this
  * function when the API is loaded.
  */
-function init() {
+const init = () => {
     // Load the first feed we've defined (index of 0).
     loadFeed(0);
-}
+};
 
 /* This function performs everything necessary to load a
  * feed using the Google Feed Reader API. It will then
@@ -40,46 +40,44 @@ function init() {
  * This function all supports a callback as the second parameter
  * which will be called after everything has run successfully.
  */
- function loadFeed(id, cb) {
-     var feedUrl = allFeeds[id].url,
-         feedName = allFeeds[id].name;
+ const loadFeed = (id, cb) => {
+     const feedUrl = allFeeds[id].url;
+     const feedName = allFeeds[id].name;
 
      $.ajax({
-       type: "POST",
-       url: 'https://rsstojson.udacity.com/parseFeed',
-       data: JSON.stringify({url: feedUrl}),
-       contentType:"application/json",
-       success: function (result, status){
+         type: 'POST',
+         url: 'https://rsstojson.udacity.com/parseFeed',
+         data: JSON.stringify({url: feedUrl}),
+         contentType: 'application/json',
+         dataType: 'json',
+         success: (result, status) => {
+             const container = $('.feed');
+             const title = $('.header-title');
+             const entries = result.feed.entries;
+             const entriesLen = entries.length;
+             const entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
-                 var container = $('.feed'),
-                     title = $('.header-title'),
-                     entries = result.feed.entries,
-                     entriesLen = entries.length,
-                     entryTemplate = Handlebars.compile($('.tpl-entry').html());
+             title.html(feedName);   // Set the header text
+             container.empty();      // Empty out all previous entries
 
-                 title.html(feedName);   // Set the header text
-                 container.empty();      // Empty out all previous entries
+             /* Loop through the entries we just loaded via the Google
+              * Feed Reader API. We'll then parse that entry against the
+              * entryTemplate (created above using Handlebars) and append
+              * the resulting HTML to the list of entries on the page.
+              */
+             entries.forEach(entry => container.append(entryTemplate(entry)));
 
-                 /* Loop through the entries we just loaded via the Google
-                  * Feed Reader API. We'll then parse that entry against the
-                  * entryTemplate (created above using Handlebars) and append
-                  * the resulting HTML to the list of entries on the page.
-                  */
-                 entries.forEach(function(entry) {
-                     container.append(entryTemplate(entry));
-                 });
+             if (cb) {
+                 cb();
+             }
+         },
 
-                 if (cb) {
-                     cb();
-                 }
-               },
-       error: function (result, status, err){
-                 //run only the callback without attempting to parse result due to error
-                 if (cb) {
-                     cb();
-                 }
-               },
-       dataType: "json"
+         error: (result, status, err) => {
+             //run only the callback without attempting to parse result due to error
+             if (cb) {
+                 cb();
+             }
+         },
      });
  }
 
@@ -92,12 +90,12 @@ google.setOnLoadCallback(init);
  * place our code in the $() function to ensure it doesn't execute
  * until the DOM is ready.
  */
-$(function() {
-    var container = $('.feed'),
-        feedList = $('.feed-list'),
-        feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
-        feedId = 0,
-        menuIcon = $('.menu-icon-link');
+$((() => {
+    const container = $('.feed');
+    const feedList = $('.feed-list');
+    const feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html());
+    const menuIcon = $('.menu-icon-link');
+    let feedId = 0;
 
     /* Loop through all of our feeds, assigning an id property to
      * each of the feeds based upon its index within the array.
@@ -105,10 +103,9 @@ $(function() {
      * above using Handlebars) and append it to the list of all
      * available feeds within the menu.
      */
-    allFeeds.forEach(function(feed) {
+    allFeeds.forEach(feed => {
         feed.id = feedId;
         feedList.append(feedItemTemplate(feed));
-
         feedId++;
     });
 
@@ -116,9 +113,8 @@ $(function() {
      * the menu, load the feed, and prevent the default action
      * (following the link) from occurring.
      */
-    feedList.on('click', 'a', function() {
-        var item = $(this);
-
+    feedList.on('click', 'a', () => {
+        const item = $(this);
         $('body').addClass('menu-hidden');
         loadFeed(item.data('id'));
         return false;
@@ -130,4 +126,4 @@ $(function() {
     menuIcon.on('click', function() {
         $('body').toggleClass('menu-hidden');
     });
-}());
+})());
