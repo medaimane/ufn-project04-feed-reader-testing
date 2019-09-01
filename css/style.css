@@ -1,6 +1,6 @@
 *,
 *:after,
-*:before: {
+*:before {
     box-sizing: inherit;
 }
 
@@ -10,9 +10,17 @@ html {
 
 body {
     color: #111;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Coda', cursive;
     font-weight: 300;
     margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5rem;
 }
 
 a {
@@ -41,7 +49,13 @@ h2 {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 0.5em 1em;
+    padding: 0.5em;
+}
+
+.signature {
+    float: right;
+    margin-right: 20px;
+    padding: 10px;
 }
 
 .icon-list {
@@ -51,7 +65,7 @@ h2 {
 
 .slide-menu {
     position: absolute;
-    top: 3.5em;
+    top: 4em;
     padding: 1em;
     background: #4caf50;
     height: 100%;

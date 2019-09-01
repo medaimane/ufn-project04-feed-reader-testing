@@ -1,12 +1,20 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>UdaciFeeds</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Mohamed Aimane Skhairi <skhairimedaimane@gmail.com>">
+        <meta name="description" content="Udacity frontend developer nanodegree, project: feed reader testing">
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700">
+        <!-- Title -->
+        <title>Med Aimane Skhairi | Classic Arcade Game Clone</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet prefetch">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
@@ -18,42 +26,50 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/boot.min.js"></script>
     </head>
     <body class="menu-hidden">
-        <div class="header">
-            <a href="#" class="menu-icon-link">
-                <i class="icon-list"></i>
-            </a>
 
-            <h1 class="header-title">Feeds</h1>
+    <div class="header">
+        <a href="#" class="menu-icon-link">
+            <i class="icon-list"></i>
+        </a>
+
+        <h1 class="header-title">Feeds</h1>
+        <div class="signature">
+            <p>Made with ❤️ by <a href="https://medaimane.github.io/" target="_blank" rel="noreferrer">Mohamed
+                Aimane
+                Skhairi</a> © 2019</p>
         </div>
+    </div>
 
-        <div class="slide-menu">
-            <ul class="feed-list"></ul>
-        </div>
+    <div class="slide-menu">
+        <ul class="feed-list"></ul>
+    </div>
 
+    <div class="container">
         <div class="feed"></div>
+    </div>
 
-        <script class="tpl-entry" type="text/x-handlebars-template">
-            <a class="entry-link" href="{{link}}">
-                <article class="entry">
-                    <h2>{{title}}</h2>
-                    <p>{{contentSnippet}}</p>
-                </article>
-            </a>
-        </script>
+    <script class="tpl-entry" type="text/x-handlebars-template">
+        <a class="entry-link" href="{{link}}">
+            <article class="entry">
+                <h2>{{title}}</h2>
+                <p>{{contentSnippet}}</p>
+            </article>
+        </a>
+    </script>
 
-        <script class="tpl-feed-list-item" type="text/x-handlebars-template">
-            <li>
-                <a href="#" data-id="{{id}}">{{name}}</a>
-            </li>
-        </script>
+    <script class="tpl-feed-list-item" type="text/x-handlebars-template">
+        <li>
+            <a href="#" data-id="{{id}}">{{name}}</a>
+        </li>
+    </script>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-        <script src="http://google.com/jsapi"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="http://google.com/jsapi"></script>
 
-        <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 
-        <script src="jasmine/spec/feedreader.js"></script>
+    <script src="jasmine/spec/feedreader.js"></script>
     </body>
 </html>
