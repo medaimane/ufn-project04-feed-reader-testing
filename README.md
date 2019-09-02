@@ -1,6 +1,20 @@
 # Udacity Frontend Nanodegree - Feed Reader Testing Project
 
 Project 04 - Feed Reader Testing.
+[Demo](https://medaimane.github.io/ufn-project04-feed-reader-testing/)
+
+## GetStarted
+
+### Instructions
+
+- Clone project locally using terminal: 
+
+```bash
+    git clone <repo-link>
+```
+
+- Open the index.html file on you favorite browser.
+- Check that all tests suite are passed on the jasmine log (button of the page)
 
 ## Project Overview
 
